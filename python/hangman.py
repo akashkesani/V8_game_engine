@@ -11,6 +11,12 @@ FV = frameviewer.FrameViewer((1280,720))
 
 display = display.Display()
 terminate = terminate.Terminate()
+
+
+
+#display.children.append())
+
+
 loop = loop.Loop()
 
 
