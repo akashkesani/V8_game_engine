@@ -1,16 +1,16 @@
 import pygame
 
 
-class DrawLetter:
+class Alarm:
 
 
     def __init__(self, ):
         
-        self.name = 'Draw Letter'
+        self.name = 'Press button action'
         self.type = ['action']
         self.children = []
-        self.event_type = None
-        self.verbose = False
+        self.eventType = None
+        self.verbose = True
         self.entity_state = None
 
     def condition_to_act(self, data = None):
@@ -19,14 +19,15 @@ class DrawLetter:
             return False
         if self.entity_state.active == False:
             return False
-        if self.entity_state.visibile == False:
-            return False
-            
+
         return True
 
     def act(self, data = None):
         
         if (self.condition_to_act()):
-            font = pygame.font.SysFont(self.entity_state.font,self.entity_state.size)
-            img = font.render(self.entity_state.letter,True,self.entity_state.color)
-            data.blit(img,self.entity_state.position)
+            if(self.entity_state.current_time - self.entity_state.start_time > 4000):
+                if(self.verbose):
+                    print("Perform action if time has passed")
+
+                for children in self.children:
+                    children.act()

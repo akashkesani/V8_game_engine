@@ -1,15 +1,15 @@
 import pygame
+import time
 
-
-class DrawLetter:
+class Update:
 
 
     def __init__(self, ):
         
-        self.name = 'Draw Letter'
-        self.type = ['action']
+        self.name = 'Press button action'
+        self.type = ['action','loop']
         self.children = []
-        self.event_type = None
+        self.eventType = None
         self.verbose = False
         self.entity_state = None
 
@@ -19,14 +19,17 @@ class DrawLetter:
             return False
         if self.entity_state.active == False:
             return False
-        if self.entity_state.visibile == False:
-            return False
-            
+
         return True
 
     def act(self, data = None):
         
         if (self.condition_to_act()):
-            font = pygame.font.SysFont(self.entity_state.font,self.entity_state.size)
-            img = font.render(self.entity_state.letter,True,self.entity_state.color)
-            data.blit(img,self.entity_state.position)
+
+            if (self.verbose):
+                print("updating current time")
+
+            self.entity_state.current_time = round(time.time()*1000)
+    
+            for children in self.children:
+                children.act()

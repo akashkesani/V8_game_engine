@@ -4,7 +4,7 @@ import pygame
 class Rectangle:
 
 
-    def __init__(self, height_, width_, start_x, start_y, color):
+    def __init__(self, height_, width_, position_, color):
         
         self.name = ''
         self.type = []
@@ -12,8 +12,8 @@ class Rectangle:
         self.active = True
         self.height = height_
         self.width = width_
-        self.start_x = start_x
-        self.start_y = start_y
+        self.start_x = position_[0]
+        self.start_y = position_[1]
         self.color = color
         self.visibile = True
 

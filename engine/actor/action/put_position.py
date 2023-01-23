@@ -1,12 +1,12 @@
 import pygame
 
 
-class DrawRectange:
+class PutPosition:
 
 
-    def __init__(self, ):
+    def __init__(self):
         
-        self.name = 'Draw Rectangle'
+        self.name = 'Put Initial Position Action'
         self.type = ['action']
         self.children = []
         self.eventType = None
@@ -21,16 +21,18 @@ class DrawRectange:
             return False
         if self.entity_state.visibile == False:
             return False
-
+        
         return True
 
     def act(self, data = None):
         
         if (self.condition_to_act()):
-            pygame.draw.rect( data, self.entity_state.color, 
-                              (self.entity_state.start_x,self.entity_state.start_y,
-                              self.entity_state.width,self.entity_state.height))
+            
+            if (self.verbose):
+                print ("setting the position of the circles entity")
 
-            if(self.children):
-                for child in self.children:
-                    child.act(data)
+            for i in range(0,len(self.entity_state.position)):
+                self.entity_state.position = data
+
+            for child in self.children:
+                child.act(data)
